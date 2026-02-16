@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <meta name="description" content="Popper Poi - Street food delivery. Best pizzas, burgers, sandwiches, and chicken popcorns in town. Online delivery available.">
+  <meta name="keywords" content="street food, pizza, burger, sandwich, popcorn, food delivery, popper poi">
+  <meta name="author" content="Popper Poi">
+  <title>Popper Poi · street food to your door</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* custom overrides */
+    .bangers-font { font-family: 'Bangers', cursive; letter-spacing: 1px; }
+    .logo-glow { text-shadow: 3px 3px 0 #ffc845; }
+    .food-quote { font-size: clamp(2.5rem, 10vw, 4rem); line-height: 1.1; }
+    .hero-food-img { background-size: cover; background-position: center 30%; border-radius: 40px 20px 40px 20px; border: 4px solid black; box-shadow: 14px 14px 0 #1e1e1e; }
+    .menu-card { border: 4px solid black; border-radius: 30px 10px 30px 10px; box-shadow: 8px 8px 0 #d62326; transition: all 0.1s ease; }
+    .menu-card:hover { transform: translate(2px,2px); box-shadow: 4px 4px 0 #d62326; }
+    .nav-link { position: relative; font-weight: 600; border-radius: 30px; transition: all 0.1s; }
+    .nav-link.active-nav { background: #d62326; color: white; border: 2px solid black; box-shadow: 3px 3px 0 black; }
+    .nav-link:not(.active-nav):hover { background: #ffc845; border: 2px solid black; box-shadow: 3px 3px 0 black; }
+    .delivery-btn { transition: all 0.15s; }
+    .delivery-btn:hover { transform: scale(0.98); }
+    .franchise-btn:hover { background: #ffc845; color: black; border-color: black; }
+    .location-btn:hover { background: #d62326; }
+    .social-ring a { background: white; border: 2px solid black; border-radius: 999px; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 3px 3px 0 black; }
+    .social-ring a:hover { background: #ffc845; transform: scale(1.05); }
+    .logo-mark {
+      background: #d62326;
+      color: #ffc845;
+      font-weight: 900;
+      font-size: 1.1rem;
+      border: 3px solid black;
+      box-shadow: 4px 4px 0 #1e1e1e;
+      transform: rotate(-3deg);
+    }
+
+    /* Professional double-sided scrolling animation (only Swiggy/Zomato) */
+    .scroll-container {
+      background: #1e1e1e;
+      border: 6px double #ffc845;
+      box-shadow: 12px 12px 0 #d62326, inset 0 0 0 2px #d62326;
+      padding: 1rem 0;
+      margin: 3rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .scroll-container::before,
+    .scroll-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 120px;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .scroll-container::before {
+      left: 0;
+      background: linear-gradient(to right, #1e1e1e 0%, transparent 100%);
+    }
+    .scroll-container::after {
+      right: 0;
+      background: linear-gradient(to left, #1e1e1e 0%, transparent 100%);
+    }
+    .scroll-track {
+      display: flex;
+      width: fit-content;
+      animation: scrollDual 28s linear infinite;
+    }
+    .scroll-content {
+      display: flex;
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+    .scroll-item {
+      font-family: 'Bangers', cursive;
+      font-size: 3.5rem;
+      color: white;
+      background: #d62326;
+      padding: 0.5rem 2.5rem;
+      border: 5px solid #ffc845;
+      transform: skew(-5deg) rotate(0.5deg);
+      box-shadow: 10px 10px 0 black;
+      white-space: nowrap;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .scroll-item i {
+      font-size: 3rem;
+      color: #ffc845;
+      filter: drop-shadow(2px 2px 0 black);
+    }
+    .scroll-item span {
+      background: black;
+      padding: 0.2rem 1.5rem;
+      margin-left: 0.5rem;
+      font-size: 2rem;
+      border: 2px solid #ffc845;
+    }
+    @keyframes scrollDual {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Professional delivery buttons - only Swiggy and Zomato */
+    .delivery-app-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+    .app-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: black;
+      border: 5px solid;
+      padding: 1rem 3rem;
+      border-radius: 80px;
+      font-weight: 900;
+      font-size: 2rem;
+      color: white;
+      box-shadow: 10px 10px 0 #1e1e1e;
+      transition: all 0.12s;
+      min-width: 260px;
+      justify-content: center;
+      letter-spacing: 1px;
+    }
+    .app-btn img {
+      height: 50px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .app-btn.swiggy { 
+      border-color: #FC8019; 
+      background: #1e1e1e;
+    }
+    .app-btn.zomato { 
+      border-color: #CB202D; 
+      background: #CB202D;
+    }
+    .app-btn:hover {
+      transform: scale(0.96);
+      box-shadow: 4px 4px 0 black;
+    }
+    /* responsive */
+    @media (max-width: 640px) {
+      .app-btn { font-size: 1.5rem; padding: 0.8rem 1.5rem; min-width: 200px; }
+      .app-btn img { height: 35px; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 py-4 sm:py-6 relative">
+    
+    <!-- HEADER with "here" logo integration -->
+    <div class="flex flex-wrap items-center justify-between mb-2 border-b-4 border-black pb-3 sm:pb-4 relative">
+      
+      <!-- LOGO BLOCK (the requested "here" element) -->
+      <!-- <div class="flex items-center gap-3 sm:gap-4 group relative">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-black rounded-full border-4 border-[#d62326] flex items-center justify-center shadow-[6px_6px_0_#ffc845] transform transition group-hover:scale-105 relative">
+          <i class="fas fa-utensils text-[#ffc845] text-2xl sm:text-3xl"></i>
+          <div class="logo-here-mark absolute -top-3 -right-3 sm:-top-4 sm:-right-4 text-xs sm:text-sm px-2 py-0.5 rounded-full rotate-3 animate-pulse"> -->
+             <img style="background-color:white" src="c:\Users\chiru\Downloads\none.gif" height="20" width="100" alt="logo"> -->
+        
+          </div>
+        </div>
+        
+        <div>
+          <h1 class="bangers-font text-3xl sm:text-4xl lg:text-5xl tracking-wide text-black">
+            <span class="text-[#d62326] logo-glow">POPPER</span> 
+            <span class="text-black">POI</span>
+          </h1>
+          <p class="text-xs sm:text-sm font-semibold uppercase bg-[#1e1e1e] text-white px-3 py-0.5 rounded-full inline-block -mt-1 border-2 border-white shadow-sm">
+            <i class="fas fa-motorcycle mr-1"></i> street eats · fast delivery
+          </p>
+        </div>
+        <span class="ml-2 bg-[#ffc845] border-2 border-black text-black font-bold text-[0.7rem] px-2 py-0.5 rounded-full rotate-[-5deg] shadow-[2px_2px_0_black] hidden sm:inline-block"></span>
+      </div>
+      
+      <!-- DESKTOP NAV -->
+      <div class="desktop-nav md:flex items-center space-x-1 lg:space-x-4 text-sm lg:text-base font-semibold uppercase tracking-wide mt-2 md:mt-0">
+        <a href="#home" class="nav-link px-2 py-1 active-nav">home</a>
+        <a href="#about" class="nav-link px-2 py-1">about us</a>
+        <a href="#franchise" class="nav-link px-2 py-1">franchise</a>
+        <a href="#menu" class="nav-link px-2 py-1">menu</a>
+        <a href="#contact" class="nav-link px-2 py-1">contact</a>
+        
+        <!-- Online order button (desktop) -->
+        <a href="#" id="orderOnlineDesktop" class="ml-2 bg-[#ffc845] border-2 border-black px-4 py-1.5 rounded-full text-black font-bold flex items-center gap-1 shadow-[4px_4px_0_#d62326] hover:shadow-[2px_2px_0_#1e1e1e] transition delivery-btn">
+          <i class="fas fa-bicycle"></i> 
+          <span class="hidden lg:inline">order online</span>
+          <span class="lg:hidden">delivery</span>
+        </a>
+      </div>
+
+      <!-- MOBILE TOGGLE -->
+      <div class="mobile-nav-toggle md:hidden">
+        <button id="mobileMenuBtn" class="text-3xl p-2 border-4 border-black bg-[#ffc845] rounded-xl shadow-[4px_4px_0_#1e1e1e] hover:shadow-[2px_2px_0_#d62326] transition">
+          <i class="fas fa-burger"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="mobile-menu hidden md:hidden w-full mt-2 z-50">
+      <div class="flex flex-col space-y-3 text-base font-bold uppercase">
+        <a href="#home" class="bg-white p-3 border-4 border-black rounded-xl flex items-center gap-3 shadow-[4px_4px_0_#d62326]"><i class="fas fa-home text-[#d62326] w-6"></i> home</a>
+        <a href="#about" class="bg-white p-3 border-4 border-black rounded-xl flex items-center gap-3 shadow-[4px_4px_0_#1e1e1e]"><i class="fas fa-info-circle text-[#f18f01] w-6"></i> about us</a>
+        <a href="#franchise" class="bg-white p-3 border-4 border-black rounded-xl flex items-center gap-3 shadow-[4px_4px_0_#d62326]"><i class="fas fa-store-alt text-[#1e1e1e] w-6"></i> franchise</a>
+        <a href="#menu" class="bg-white p-3 border-4 border-black rounded-xl flex items-center gap-3 shadow-[4px_4px_0_#ffc845]"><i class="fas fa-pizza-slice text-[#d62326] w-6"></i> menu</a>
+        <a href="#contact" class="bg-white p-3 border-4 border-black rounded-xl flex items-center gap-3 shadow-[4px_4px_0_#1e1e1e]"><i class="fas fa-phone-alt w-6"></i> contact</a>
+        <a href="#" id="orderOnlineMobile" class="bg-[#d62326] text-white p-3 border-4 border-black rounded-xl flex items-center gap-3 shadow-[6px_6px_0_#1e1e1e] delivery-btn"><i class="fas fa-bicycle"></i> delivery — order now</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div id="home" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 my-8 sm:my-12 items-center">
+      <div class="order-2 lg:order-1">
+        <span class="inline-block bg-[#1e1e1e] text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold uppercase border-2 border-white shadow-[4px_4px_0_#d62326] mb-4">
+          <i class="fas fa-tag mr-2"></i> corner street since 2024
+        </span>
+        
+        <div class="food-quote bangers-font text-black leading-tight">
+          <span class="bg-[#ffc845] px-2">crunchy</span> pizzas,<br>
+          <span class="bg-[#d62326] text-white px-2">juicy</span> burgers,<br>
+          & spicy popcorns
+        </div>
+        
+        <p class="text-base sm:text-lg text-black/80 font-medium mt-6 border-l-8 border-[#f18f01] pl-4 italic">
+          “Fresh from the pan · sizzling to your door” 
+          <i class="fas fa-motorcycle ml-2 text-[#d62326] text-xl"></i>
+        </p>
+        
+        <div class="flex flex-wrap items-center gap-4 mt-8">
+          <a href="#" id="orderOnlineHero" class="bg-[#d62326] border-4 border-black text-white font-black px-8 py-3 rounded-full text-sm sm:text-base uppercase tracking-wider shadow-[8px_8px_0_#1e1e1e] hover:shadow-[4px_4px_0_black] transition flex items-center gap-2 delivery-btn">
+            <i class="fas fa-bolt"></i> order online
+          </a>
+          <a href="#menu" class="bg-white border-4 border-black px-6 py-3 rounded-full text-black font-bold shadow-[6px_6px_0_#ffc845] hover:shadow-[2px_2px_0_#f18f01] transition flex items-center gap-2">
+            <i class="fas fa-book-open"></i> full menu
+          </a>
+        </div>
+        
+        <div class="flex mt-8 gap-5 text-xs sm:text-sm font-bold">
+          <span class="flex items-center gap-2"><i class="fas fa-clock text-[#d62326]"></i> 25–35 min</span>
+          <span class="flex items-center gap-2"><i class="fas fa-check-circle text-[#1e1e1e]"></i> contactless</span>
+          <span class="flex items-center gap-2"><i class="fas fa-fire text-[#f18f01]"></i> spicy zone</span>
+        </div>
+      </div>
+      
+      <!-- RIGHT IMAGE -->
+      <div class="order-1 lg:order-2 hero-food-img w-full h-64 sm:h-80 lg:h-96 xl:h-[420px] relative flex items-end p-6" 
+           style="background-image: linear-gradient(65deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 80%), url('foodpage.png.jpeg');">
+        <div class="bg-white border-4 border-black p-3 rounded-xl rotate-[-2deg] shadow-[8px_8px_0_rgba(0,0,0,0.8)]">
+          <span class="bangers-font text-2xl sm:text-3xl text-[#d62326]">#POPPERPOI</span>
+          <span class="ml-2 bg-black text-white px-3 py-1 text-sm">est. 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENU HIGHLIGHTS -->
+    <div id="menu" class="my-16 sm:my-20">
+      <div class="flex items-center gap-4 mb-8">
+        <i class="fas fa-crown text-3xl text-[#d62326] border-4 border-black p-3 rounded-full bg-[#ffc845] shadow-[4px_4px_0_black]"></i>
+        <h2 class="bangers-font text-3xl sm:text-4xl tracking-wide">street specialities</h2>
+        <span class="flex-1 h-3 border-t-4 border-dashed border-black"></span>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 auto-rows-fr">
+        <!-- menu cards (unchanged) -->
+        <div class="menu-card p-5 flex flex-col items-center text-center bg-white">
+          <div class="w-20 h-20 bg-[#f18f01] rounded-full border-4 border-black flex items-center justify-center text-4xl shadow-[4px_4px_0_#1e1e1e] -mt-8 mb-3"><i class="fas fa-pizza-slice text-white"></i></div>
+          <h3 class="font-black text-xl uppercase">PIZZA</h3>
+          <p class="text-xs font-medium">margherita · pepperoni · street</p>
+          <span class="mt-2 bg-black text-white px-3 py-0.5 text-xs rounded-full">🔥 12" pan</span>
+        </div>
+        <div class="menu-card p-5 flex flex-col items-center text-center bg-white">
+          <div class="w-20 h-20 bg-[#d62326] rounded-full border-4 border-black flex items-center justify-center text-4xl shadow-[4px_4px_0_#1e1e1e] -mt-8 mb-3"><i class="fas fa-burger text-white"></i></div>
+          <h3 class="font-black text-xl uppercase">BURGER</h3>
+          <p class="text-xs font-medium">double smashed · peri peri</p>
+          <span class="mt-2 bg-black text-white px-3 py-0.5 text-xs rounded-full">🍔 crunz</span>
+        </div>
+        <div class="menu-card p-5 flex flex-col items-center text-center bg-white">
+          <div class="w-20 h-20 bg-[#1e1e1e] rounded-full border-4 border-[#ffc845] flex items-center justify-center text-4xl shadow-[4px_4px_0_#d62326] -mt-8 mb-3"><i class="fas fa-bread-slice text-[#ffc845]"></i></div>
+          <h3 class="font-black text-xl uppercase">SANDWICH</h3>
+          <p class="text-xs font-medium">grilled cheese · chicken tikka</p>
+          <span class="mt-2 bg-[#ffc845] text-black px-3 py-0.5 text-xs rounded-full border-2 border-black">toasty</span>
+        </div>
+        <div class="menu-card p-5 flex flex-col items-center text-center bg-white">
+          <div class="w-20 h-20 bg-[#e65c1e] rounded-full border-4 border-black flex items-center justify-center text-4xl shadow-[4px_4px_0_#1e1e1e] -mt-8 mb-3"><i class="fas fa-popcorn text-white"></i></div>
+          <h3 class="font-black text-xl uppercase">POPCORN</h3>
+          <p class="text-xs font-medium">chicken · spicy salt</p>
+          <span class="mt-2 bg-black text-white px-3 py-0.5 text-xs rounded-full">🍿 pop</span>
+        </div>
+        <div class="menu-card p-5 flex flex-col items-center text-center bg-white col-span-2 md:col-span-1">
+          <div class="w-20 h-20 bg-[#ffc845] rounded-full border-4 border-black flex items-center justify-center text-4xl shadow-[4px_4px_0_#1e1e1e] -mt-8 mb-3"><i class="fas fa-drumstick-bite text-black"></i></div>
+          <h3 class="font-black text-xl uppercase">MANY MORE</h3>
+          <p class="text-xs font-medium">fries · nuggets · wraps</p>
+          <span class="mt-2 bg-black text-white px-3 py-0.5 text-xs rounded-full">+8 items</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFESSIONAL DELIVERY APP SECTION - ONLY SWIGGY & ZOMATO WITH LOGOS -->
+    <div class="my-12 py-8 border-y-4 border-black bg-[#fef9e8] rounded-[50px] shadow-[10px_10px_0_#d62326]">
+      <div class="text-center mb-6">
+        <span class="bangers-font text-4xl sm:text-5xl bg-[#ffc845] px-8 py-2 border-4 border-black inline-block rotate-[-1deg] shadow-[6px_6px_0_black]">🍕 ORDER ONLINE</span>
+      </div>
+      <div class="delivery-app-grid">
+        <!-- Swiggy with official logo -->
+        <a href="https://www.swiggy.com/restaurants/popper-poi-mumbai-12345" target="_blank" rel="noopener noreferrer" class="app-btn swiggy">
+          <img src="swiggy.png.png" alt="Swiggy">
+          <span>Swiggy</span>
+        </a>
+        <!-- Zomato with official logo -->
+        <a href="https://www.zomato.com/mumbai/popper-poi-restaurant" target="_blank" rel="noopener noreferrer" class="app-btn zomato">
+          <img src="https://b.zmtcdn.com/images/logo/zomato_logo_2017.png" alt="Zomato">
+          <span>Zomato</span>
+        </a>
+      </div>
+      <p class="text-center text-black font-bold text-sm sm:text-base mt-6 bg-white border-4 border-black p-3 rounded-full w-fit mx-auto px-8 shadow-[4px_4px_0_#d62326]">
+        ⚡ 25–35 min · contactless · cash/UPI
+      </p>
+    </div>
+
+    <!-- INFO CARDS -->
+    <div id="about" class="my-14 grid grid-cols-1 md:grid-cols-3 gap-7">
+      <!-- ABOUT US CARD -->
+      <div class="bg-[#1e1e1e] border-4 border-[#ffc845] p-6 rounded-[40px_12px_40px_12px] shadow-[12px_12px_0_#d62326]">
+        <div class="flex items-center gap-3 text-white">
+          <i class="fas fa-info-circle text-4xl text-[#ffc845]"></i>
+          <h3 class="bangers-font text-3xl text-white">ABOUT</h3>
+        </div>
+        <p class="text-white/90 font-medium mt-2 text-sm sm:text-base">
+          Born on the busy streets, Popper Poi serves fresh pizzas, wicked burgers & desi-style popcorns. Cash or UPI — we roar.
+        </p>
+        <div class="mt-4 flex items-center text-[#ffc845]">
+          <i class="fas fa-location-dot mr-2"></i> City Center, India 
+          <span class="ml-2 text-white border-l-2 pl-2">since '24</span>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Popper+Poi+Restaurant+City+Center+India" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-1 text-white bg-black px-3 py-1 rounded-full text-xs border-2 border-white">
+          <i class="fas fa-map-pin"></i> view map
+        </a>
+      </div>
+      
+      <!-- FRANCHISE CARD -->
+      <div id="franchise" class="franchise-badge p-6 bg-[#ffc845] border-4 border-black rounded-[30px_10px_30px_10px] shadow-[10px_10px_0_#1e1e1e]">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-store text-4xl text-black"></i>
+          <h3 class="bangers-font text-3xl text-black">FRANCHISE</h3>
+        </div>
+        <p class="text-black font-bold text-sm sm:text-base mt-2">
+          Own a Popper Poi kiosk! low investment, high sizzle. 🚀
+        </p>
+        <button class="mt-4 bg-black text-white px-6 py-2 rounded-full border-2 border-white font-bold text-sm shadow-[4px_4px_0_#d62326] hover:shadow-[1px_1px_0_#d62326] transition flex items-center gap-2 franchise-btn">
+          <i class="fas fa-hand-holding-usd"></i> franchise@popperpoi
+        </button>
+      </div>
+      
+      <!-- CONTACT CARD -->
+      <div id="contact" class="bg-white border-4 border-black p-6 rounded-[20px_50px_20px_50px] shadow-[8px_8px_0_#f18f01]">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-headset text-3xl text-[#d62326]"></i>
+          <h3 class="bangers-font text-3xl">CONTACT</h3>
+        </div>
+        <div class="mt-3 space-y-3 font-semibold">
+          <p><a href="tel:+18007867323" class="flex items-center hover:text-[#d62326] transition"><i class="fas fa-phone-alt mr-2 text-[#d62326]"></i> +1 800 STREET 23</a></p>
+          <p><a href="mailto:eat@popperpoi.com?subject=Order%20Inquiry" class="flex items-center hover:text-[#d62326] transition"><i class="fas fa-envelope mr-2 text-[#1e1e1e]"></i> eat@popperpoi.com</a></p>
+          <p class="flex items-center"><i class="fas fa-bicycle mr-2 text-[#f18f01]"></i> delivery 11am–11pm</p>
+         
+          <!-- Swiggy Zomato inside contact -->
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <a href="https://www.swiggy.com/restaurants/popper-poi-mumbai-12345" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-black border-4 border-[#FC8019] px-3 py-2 rounded-full text-white font-bold text-sm shadow-[4px_4px_0_#FC8019] hover:shadow-[1px_1px_0_#FC8019] transition">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Swiggy_logo.svg/2560px-Swiggy_logo.svg.png" class="h-5 w-auto filter brightness-0 invert"><span>Swiggy</span>
+            </a>
+            <a href="https://www.zomato.com/mumbai/popper-poi-restaurant" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-[#CB202D] border-4 border-white px-3 py-2 rounded-full text-white font-bold text-sm shadow-[4px_4px_0_black] hover:shadow-[1px_1px_0_black] transition">
+              <img src="https://b.zmtcdn.com/images/logo/zomato_logo_2017.png" alt="Zomato" class="h-5 w-auto filter brightness-0 invert"><span>Zomato</span>
+            </a>
+          </div>
+          
+          <!-- LOCATION BUTTON -->
+          <div class="mt-2">
+            <a href="https://www.google.com/maps/search/?api=1&query=Popper+Poi+Restaurant+City+Center+India" target="_blank" rel="noopener noreferrer" class="location-btn flex items-center justify-center gap-3 w-full bg-[#1e1e1e] border-4 border-[#ffc845] px-4 py-2 rounded-full text-white font-bold shadow-[4px_4px_0_#d62326] hover:shadow-[2px_2px_0_#d62326] transition">
+              <i class="fas fa-map-marked-alt text-[#ffc845]"></i>
+              <span>FIND US ON MAPS (Vijayawada, City Center)</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="social-ring flex justify-center gap-3 mt-4 text-xl">
+          <a href="https://wa.me/918000000000" target="_blank" class="hover:scale-110 transition"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://instagram.com/popperpoi" target="_blank" class="hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com/popperpoi" target="_blank" class="hover:scale-110 transition"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOCATION BANNER -->
+    <div class="my-8 bg-black border-4 border-[#ffc845] p-5 rounded-[30px] shadow-[10px_10px_0_#d62326]">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 bg-white rounded-full border-4 border-black flex items-center justify-center">
+            <i class="fas fa-location-dot text-2xl text-[#d62326]"></i>
+          </div>
+          <div>
+            <h4 class="bangers-font text-2xl text-white">VISIT OUR STREET KITCHEN</h4>
+            <p class="text-[#ffc845] font-bold">🏠 City Center, India · open 11am to 11pm</p>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Popper+Poi+Restaurant+City+Center+India" target="_blank" rel="noopener noreferrer" class="bg-[#ffc845] border-4 border-black px-8 py-3 rounded-full text-black font-black flex items-center gap-3 shadow-[6px_6px_0_white] hover:shadow-[2px_2px_0_white] transition text-lg">
+          <i class="fas fa-directions"></i> GET DIRECTIONS <i class="fas fa-map"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- EMBEDDED MAP -->
+    <div class="my-10 border-4 border-black rounded-3xl overflow-hidden shadow-[12px_12px_0_#d62326]">
+      <center>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.4460198542397!2d80.64981039999999!3d16.5035655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35fb007c4c2d77%3A0x90109efa6c1a9161!2sPopper%20Poi%20Pot%20Shawarma!5e0!3m2!1sen!2sin!4v1770892062658!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </center>
+    </div>
+
+    <!-- PROFESSIONAL DUAL-SIDED SCROLLING THANK YOU ANIMATION (only Swiggy/Zomato logo-free, just message) -->
+    <div class="scroll-container">
+      <div class="scroll-track">
+        <!-- first block -->
+        <div class="scroll-content">
+          <div class="scroll-item"><i class="fas fa-heart"></i> THANK YOU <span>🙏</span></div>
+          <div class="scroll-item"><i class="fas fa-redo-alt"></i> VISIT AGAIN <span>❤️</span></div>
+          <div class="scroll-item"><i class="fas fa-smile"></i> HAPPY TO SERVE <span>🍕</span></div>
+        </div>
+        <!-- duplicate for seamless loop -->
+        <div class="scroll-content">
+          <div class="scroll-item"><i class="fas fa-heart"></i> THANK YOU <span>🙏</span></div>
+          <div class="scroll-item"><i class="fas fa-redo-alt"></i> VISIT AGAIN <span>❤️</span></div>
+          <div class="scroll-item"><i class="fas fa-smile"></i> HAPPY TO SERVE <span>🍕</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t-8 border-black mt-12 pt-8 pb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+      <div class="flex items-center gap-2 mb-4 sm:mb-0">
+        <i class="fas fa-truck text-2xl bg-black text-white p-2 rounded-full border-2 border-[#ffc845]"></i>
+        <span class="bangers-font text-2xl">POPPER POI ⚡ streetery</span>
+      </div>
+      
+      <div class="text-sm font-bold flex flex-wrap gap-4 items-center">
+        <span>home</span> <span>about</span> <span>franchise</span> <span>menu</span> <span>contact</span>
+        
+        <a href="https://www.swiggy.com/restaurants/popper-poi-mumbai-12345" target="_blank" class="flex items-center gap-1 text-[#FC8019] hover:underline">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Swiggy_logo.svg/2560px-Swiggy_logo.svg.png" alt="Swiggy" class="h-4 w-auto">
+        </a>
+        <a href="https://www.zomato.com/mumbai/popper-poi-restaurant" target="_blank" class="flex items-center gap-1 text-[#CB202D] hover:underline">
+          <img src="https://b.zmtcdn.com/images/logo/zomato_logo_2017.png" alt="Zomato" class="h-4 w-auto">
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Popper+Poi+Restaurant+City+Center+India" target="_blank" rel="noopener noreferrer" class="text-[#d62326] flex items-center gap-1">
+          <i class="fas fa-map-pin"></i> 23, food truck lane
+        </a>
+      </div>
+      
+      <p class="text-xs w-full sm:w-auto mt-4 sm:mt-0 text-black/70 font-medium">
+        © 2024 Popper Poi — no brakes, full flavour
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('mobileMenu');
+    if (btn && menu) {
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    }
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobileMenu')?.classList.add('hidden');
+      });
+    });
+
+    // line click handler: scroll to Swiggy/Zomato section
+    function handleOrderClick(event) {
+      event.preventDefault();
+      const target = document.querySelector('.my-12.py-8.border-y-4'); // delivery app section
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.style.transition = 'box-shadow 0.2s';
+        target.style.boxShadow = '0 0 0 6px #ffc845, 10px 10px 0 #d62326';
+        setTimeout(() => target.style.boxShadow = '10px 10px 0 #d62326', 600);
+      }
+    }
+    document.querySelectorAll('#orderOnlineDesktop, #orderOnlineMobile, #orderOnlineHero').forEach(btn => {
+      if (btn) btn.addEventListener('click', handleOrderClick);
+    });
+  </script>
+  <!-- address block (hidden) -->
+  <div class="contact-box center hidden"><h3>🏠 Address</h3><p>Popper Poi Restaurant City Center, India</p></div>
+</body>
+</html>

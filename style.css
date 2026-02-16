@@ -1,0 +1,356 @@
+/* 
+================================================
+POPPER POI - STREET FOOD THEME
+================================================
+Author: Senior UI Developer
+Purpose: Custom styles beyond Tailwind
+         Street food gritty, bold, energetic aesthetic
+         Mobile-first responsive design
+
+COLOR PALETTE:
+--popper-red: #d62326     (primary brand red)
+--popper-yellow: #ffc845  (mustard yellow, contrast)
+--popper-orange: #f18f01  (spicy orange)
+--popper-dark: #1e1e1e    (almost black)
+--popper-grey: #2c2c2c    (dark grey for shadows)
+--popper-light: #fef9e8   (warm paper background)
+--popper-splatter: #e65c1e (popcorn orange)
+================================================
+*/
+
+/* ---------- CSS CUSTOM PROPERTIES (VARIABLES) ---------- */
+:root {
+  --popper-red: #d62326;
+  --popper-yellow: #ffc845;
+  --popper-orange: #f18f01;
+  --popper-dark: #1e1e1e;
+  --popper-grey: #2c2c2c;
+  --popper-light: #fef9e8;
+  --popper-splatter: #e65c1e;
+  --black: #000000;
+  --white: #ffffff;
+}
+
+/* ---------- GLOBAL BODY STYLES ---------- */
+body {
+  /* 
+    Poppins - clean, modern, highly readable
+    Fallback to sans-serif
+  */
+  font-family: 'Poppins', sans-serif;
+  
+  /* 
+    Warm paper background to mimic street menu
+    Radial gradients create subtle grunge/splatter effect
+  */
+  background: #f7f2e9;
+  background-image: 
+    radial-gradient(circle at 10% 30%, rgba(255,200,70,0.05) 0%, transparent 25%),
+    radial-gradient(circle at 90% 70%, rgba(214,35,38,0.03) 0%, transparent 30%);
+  
+  color: #1e1e1e;
+  
+  /* Smooth scrolling for anchor links */
+  scroll-behavior: smooth;
+}
+
+/* ---------- STREET GRAFFITI FONT ---------- */
+/* 
+  Bangers - thick, comic-style, perfect for headings
+  Used for logo, quotes, section titles
+  letter-spacing: 2px gives that spread-out graffiti look
+*/
+.bangers-font {
+  font-family: 'Bangers', cursive;
+  letter-spacing: 2px;
+  word-spacing: 6px;
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+}
+
+/* 
+  Logo specific glow effect 
+  Double shadow: yellow then black
+  Mimics retro street sign
+*/
+.logo-glow {
+  text-shadow: 
+    4px 4px 0 #ffc845, 
+    6px 6px 0 rgba(0,0,0,0.2);
+}
+
+/* ---------- IGATION STYLES ---------- */
+.nav-link {
+  font-weight: 600;
+  position: relative;
+  transition: all 0.2s ease;
+  padding-bottom: 4px;
+}
+
+/* 
+  Animated underline effect
+  Starts from center (left: 50%, translateX(-50%))
+  Expands on hover
+*/
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 50%;
+  background: #d62326;
+  transition: all 0.25s ease-out;
+  transform: translateX(-50%);
+  border-radius: 20px;
+}
+
+/* Expand underline on hover */
+.nav-link:hover:after,
+.nav-link.active:after {
+  width: 80%;
+}
+
+/* Text color change on hover */
+.nav-link:hover {
+  color: #d62326;
+}
+
+/* ---------- HERO IMAGE STYLING ---------- */
+/* 
+  HD street food image container
+  Heavy border, double shadow for depth
+  Border radius: 28px for street edge feel
+*/
+.hero-food-img {
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+  border-radius: 28px 28px 28px 28px;
+  box-shadow: 
+    12px 12px 0 #2c2c2c,    /* dark grey shadow */
+    16px 16px 20px rgba(0,0,0,0.3); /* soft spread */
+  border: 3px solid #1e1e1e;
+}
+
+/* ---------- MENU CARDS ---------- */
+/* 
+  Tilted border radius: 24px 8px 24px 8px
+  Asymmetric = street imperfection
+  box-shadow: 8px 8px 0 red
+*/
+.menu-card {
+  background: white;
+  border: 2px solid #1e1e1e;
+  border-radius: 24px 8px 24px 8px;
+  transition: all 0.2s ease;
+  box-shadow: 8px 8px 0 #d62326;
+}
+
+/* 
+  Hover effect: 
+  - Move up and left (-4px, -4px)
+  - Shadow becomes darker and larger
+  - Interactive feedback
+*/
+.menu-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 14px 14px 0 #1e1e1e;
+}
+
+/* ---------- FRANCHISE BADGE ---------- */
+/* 
+  Dashed border with red
+  Unique border radius
+*/
+.franchise-badge {
+  background: #ffc845;
+  border: 2px dashed #d62326;
+  border-radius: 40px 12px 40px 12px;
+}
+
+/* ---------- SOCIAL ICONS RING ---------- */
+.social-ring i {
+  background: white;
+  padding: 10px;
+  border-radius: 50%;
+  border: 2px solid #1e1e1e;
+  box-shadow: 4px 4px 0 #d62326;
+  transition: 0.2s;
+}
+
+/* 
+  Hover effect: 
+  - Shadow reduces (pressed feel)
+  - Background turns yellow
+*/
+.social-ring i:hover {
+  box-shadow: 2px 2px 0 #1e1e1e;
+  background: #ffc845;
+}
+
+/* ---------- FOOD QUOTE RESPONSIVE SIZING ---------- */
+.food-quote {
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+/* ---------- POPCORN ANIMATION ---------- */
+/* 
+  Subtle pop animation for popcorn icon
+  Scales 1 -> 1.1 -> 1
+  Infinite loop
+*/
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.fa-popcorn {
+  color: #f18f01;
+  animation: pop 1.5s infinite;
+}
+
+/* ---------- ACTIVE NAVIGATION STATE ----------
+.active-nav {
+  color: #d62326;
+  font-weight: 800;
+} */
+
+.active-nav:after {
+  width: 80%;
+}
+
+/* ---------- MOBILE MENU TOGGLE ---------- */
+/* Hidden by default on desktop */
+.mobile-nav-toggle {
+  display: none;
+}
+
+/* 
+================================================
+RESPONSIVE BREAKPOINTS
+================================================
+Mobile: 0 - 640px (Tailwind sm)
+Tablet: 640px - 768px (md)
+Desktop: 768px+ (md and above)
+
+All custom responsive overrides below
+================================================
+*/
+
+/* ---------- SMALL MOBILE (<= 640px) ---------- */
+@media (max-width: 640px) {
+  /* Adjust hero image for mobile */
+  .hero-food-img {
+    background-position: 70% center; /* Focus on food */
+    box-shadow: 6px 6px 0 #1e1e1e;    /* Smaller shadow */
+    border-radius: 20px;
+  }
+  
+  /* Reduce logo shadow size */
+  .logo-glow {
+    text-shadow: 
+      2px 2px 0 #ffc845, 
+      3px 3px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Adjust food quote size */
+  .food-quote {
+    font-size: 1.8rem;
+  }
+}
+
+/* ---------- TABLET AND BELOW (<= 768px) ---------- */
+@media (max-width: 768px) {
+  /* Hide desktop navigation */
+  .desktop-{
+    display: none;
+  }
+  
+  /* Show mobile toggle button */
+  .mobile-nav-toggle {
+    display: block;
+  }
+  
+  /* Mobile menu active state */
+  .mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+    background: #fef9e8;
+    border: 3px solid #1e1e1e;
+    border-radius: 20px;
+    padding: 1.2rem;
+    margin-top: 0.8rem;
+    box-shadow: 8px 8px 0 #d62326;
+  }
+}
+
+/* ---------- EXTRA SMALL MOBILE (<= 480px) ---------- */
+@media (max-width: 480px) {
+  .food-quote {
+    font-size: 1.7rem;
+  }
+}
+
+/* ---------- DESKTOP (>= 768px) ---------- */
+@media (min-width: 768px) {
+  /* Ensure mobile menu is hidden on desktop */
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+/* ---------- ANIMATION KEYFRAMES ---------- */
+/* 
+  Fade in animation for mobile menu
+  Used in JavaScript
+*/
+@keyframes fadeIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* ---------- UTILITY CLASSES ---------- */
+/* No brakes, full flavour - brand attitude */
+.text-shadow-heavy {
+  text-shadow: 4px 4px 0 #000000;
+}
+
+/* Pizza slice hover effect */
+.fa-pizza-slice:hover {
+  transform: rotate(15deg);
+  transition: transform 0.2s;
+}
+
+/* 
+  Custom scrollbar - street style
+  Works in Webkit browsers (Chrome, Safari, Edge)
+*/
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7f2e9;
+  border-left: 2px solid black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d62326;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffc845;
+}
+
+
+
